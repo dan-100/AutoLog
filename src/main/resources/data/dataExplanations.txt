@@ -1,0 +1,5 @@
+vehicles.csv is a csv file that contains the data for each vehicle that the user may own. In order it contains: year, make, model, and current mileage. This will be used in the app to set which vehicle is currently selected to edit services and see its history.
+
+service_history.csv is a csv file that contains the data for each service gotten on a specific car. In order it contains: job type, date, mileage, cost, and notes (optional). This will be used to keep track of different service jobs done onto a car. 
+
+the different png files will serve as icons for the different screens and functions of the service app.
