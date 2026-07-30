@@ -34,6 +34,7 @@
 
 <?import com.gluonhq.charm.glisten.mvc.View?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -43,7 +44,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<View maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<View maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.autolog.autolog.controller.AddServiceController">
    <center>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="360.0" BorderPane.alignment="CENTER">
          <children>
@@ -54,37 +55,37 @@
                         <Font name="Helvetica Neue Bold" size="32.0" />
                      </font>
                   </Text>
-                  <Button fx:id="saveButton" layoutX="281.0" layoutY="53.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="65.0" style="-fx-background-color: #033375;">
+                  <Button fx:id="saveButton" layoutX="285.0" layoutY="54.0" mnemonicParsing="false" onAction="#saveServiceRecord" prefHeight="53.0" prefWidth="68.0" style="-fx-background-color: #033375;">
                      <graphic>
-                        <ImageView fitHeight="58.0" fitWidth="58.0" preserveRatio="true">
+                        <ImageView fitHeight="48.0" fitWidth="46.0" preserveRatio="true">
                            <image>
-                              <Image url="@../floppy-disk-regular-2.png" />
+                              <Image url="@../../../../data/saveButtonWhite.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="backButton" layoutY="66.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="45.0" style="-fx-background-color: #033375;">
+                  <Button fx:id="backButton" layoutY="57.0" mnemonicParsing="false" onAction="#returnToDashboard" prefHeight="31.0" prefWidth="45.0" style="-fx-background-color: #033375;">
                      <graphic>
                         <ImageView fitHeight="42.0" fitWidth="42.0" preserveRatio="true">
                            <image>
-                              <Image url="@../chevron-left-solid-2.png" />
+                              <Image url="@../../../../data/backButton.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
                </children>
             </Pane>
-            <TextField fx:id="serviceTypeField" layoutX="26.0" layoutY="175.0" prefHeight="44.0" prefWidth="308.0" promptText="ex. Tire Alignment">
+            <TextField fx:id="serviceTypeField" layoutX="25.0" layoutY="193.0" prefHeight="44.0" prefWidth="308.0" promptText="ex. Tire Alignment">
                <font>
                   <Font size="26.0" />
                </font>
             </TextField>
-            <TextField fx:id="serviceDateField" layoutX="26.0" layoutY="284.0" prefHeight="44.0" prefWidth="308.0" promptText="ex. 6/18/2026">
+            <TextField fx:id="serviceDateField" layoutX="26.0" layoutY="292.0" prefHeight="44.0" prefWidth="308.0" promptText="ex. 6/18/2026">
                <font>
                   <Font size="26.0" />
                </font>
             </TextField>
-            <TextField fx:id="serviceMileageField" layoutX="26.0" layoutY="389.0" prefHeight="44.0" prefWidth="308.0" promptText="ex. 5000">
+            <TextField fx:id="serviceMileageField" layoutX="25.0" layoutY="397.0" prefHeight="44.0" prefWidth="308.0" promptText="ex. 5000">
                <font>
                   <Font size="26.0" />
                </font>
@@ -94,27 +95,27 @@
                   <Font size="26.0" />
                </font>
             </TextField>
-            <TextField fx:id="notesField" alignment="TOP_LEFT" layoutX="26.0" layoutY="614.0" prefHeight="102.0" prefWidth="308.0" promptText="eg. done at discount tire">
+            <TextField fx:id="notesField" alignment="TOP_LEFT" layoutX="26.0" layoutY="601.0" prefHeight="102.0" prefWidth="308.0" promptText="eg. done at discount tire">
                <font>
                   <Font size="26.0" />
                </font>
             </TextField>
-            <Text fx:id="serviceTypeLabel" layoutX="26.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Type" wrappingWidth="152.21630859375">
+            <Text fx:id="serviceTypeLabel" layoutX="25.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Type" wrappingWidth="152.21630859375">
                <font>
                   <Font size="26.0" />
                </font>
             </Text>
-            <Text fx:id="dateLabel" layoutX="26.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" wrappingWidth="65.21630859375">
+            <Text fx:id="dateLabel" layoutX="26.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" wrappingWidth="65.21630859375">
                <font>
                   <Font size="26.0" />
                </font>
             </Text>
-            <Text fx:id="mileageLabel" layoutX="26.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mileage" wrappingWidth="118.21630859375">
+            <Text fx:id="mileageLabel" layoutX="25.0" layoutY="389.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mileage" wrappingWidth="118.21630859375">
                <font>
                   <Font size="26.0" />
                </font>
             </Text>
-            <Text fx:id="costLabel" layoutX="26.0" layoutY="492.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cost ($)" wrappingWidth="90.21630859375">
+            <Text fx:id="costLabel" layoutX="26.0" layoutY="497.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cost ($)" wrappingWidth="90.21630859375">
                <font>
                   <Font size="26.0" />
                </font>
@@ -124,6 +125,11 @@
                   <Font size="26.0" />
                </font>
             </Text>
+            <Label fx:id="statusLabel" layoutX="25.0" layoutY="126.0" prefHeight="17.0" prefWidth="308.0" style="-fx-alignment: center;" text="status">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </center>

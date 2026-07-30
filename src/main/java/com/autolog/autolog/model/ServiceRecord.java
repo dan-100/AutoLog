@@ -23,7 +23,7 @@ public class ServiceRecord {
 
     public String getServiceType() {
         return serviceType;
-    }4
+    }
 
     public void setServiceType(String serviceType) {
         this.serviceType = serviceType;

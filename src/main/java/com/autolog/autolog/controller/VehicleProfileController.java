@@ -46,6 +46,7 @@ public class VehicleProfileController {
 
     public void saveChanges() {
         if (!validateInput()) {
+           System.out.println("Invalid Input");
             return;
         }
 
@@ -53,10 +54,15 @@ public class VehicleProfileController {
         String make = makeField.getText();
         String model = modelField.getText();
         int mileage = Integer.parseInt(mileageField.getText());
+        //if notes are needed
+//        if (!notesField.getText().equals("")) {
+//            String notes = notesField.getText();
+//        }
 
         Vehicle vehicle = new Vehicle(year, make, model, mileage);
 
         vehicleManager.updateVehicle(vehicle);
+        System.out.println("Vehicle Saved Successfully" + vehicle.getYear() + vehicle.getMake()+vehicle.getModel()+vehicle.getMileage());
     }
 
     public boolean validateInput() {

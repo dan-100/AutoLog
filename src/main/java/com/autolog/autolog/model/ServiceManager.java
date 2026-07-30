@@ -50,7 +50,7 @@ public class ServiceManager {
         int count = 0;
 
         for (ServiceRecord record : serviceRecords) {
-            if (record.getType().equalsIgnoreCase(type)) {
+            if (record.getServiceType().equalsIgnoreCase(type)) {
                 count++;
             }
         }
