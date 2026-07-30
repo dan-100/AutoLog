@@ -1,12 +1,27 @@
-package com.autolog.autolog.controller;//need to add this as the controller for the mobileService.fxml file
+package com.autolog.autolog.controller;
 
 import com.autolog.autolog.model.ServiceManager;
 import com.autolog.autolog.model.ServiceRecord;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.net.URL;
+
+/**
+ * Controls the Add Service screen.
+ */
 public class AddServiceController {
+
+    private static final String DASHBOARD_FXML =
+            "/com/autolog/autolog/layouts/mobileDashboard.fxml";
 
     @FXML
     private TextField serviceTypeField;
@@ -23,26 +38,29 @@ public class AddServiceController {
     @FXML
     private TextField notesField;
 
+    private final ServiceManager serviceManager = new ServiceManager();
+
+    /**
+     * Loads the existing service history when the screen opens.
+     */
     @FXML
-    private Text statusLabel;
-
-    private ServiceManager serviceManager;
-
-    @FXML
-    public void initialize() {
-
-        serviceManager = new ServiceManager();
-
+    private void initialize() {
         try {
             serviceManager.loadServices();
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (IOException | IllegalArgumentException exception) {
+            showAlert(
+                    Alert.AlertType.ERROR,
+                    "Service Data Error",
+                    "The existing service history could not be loaded."
+            );
         }
     }
 
+    /**
+     * Matches onAction="#handleSaveService" in mobileService.fxml.
+     */
     @FXML
-    private void saveServiceRecord() {
+    private void handleSaveService(ActionEvent event) {
         if (!validateInput()) {
             return;
         }
@@ -51,50 +69,115 @@ public class AddServiceController {
 
         try {
             serviceManager.addService(record);
-            statusLabel.setStyle("-fx-fill: green;");
-            statusLabel.setText("Service saved successfully.");
+
+            showAlert(
+                    Alert.AlertType.INFORMATION,
+                    "Service Saved",
+                    "The service record was saved successfully."
+            );
+
             clearFields();
 
-        }
-        catch (Exception e) {
-            statusLabel.setStyle("-fx-fill: red;");
-            statusLabel.setText("Unable to save service.");
+        } catch (Exception exception) {
+            showAlert(
+                    Alert.AlertType.ERROR,
+                    "Save Error",
+                    "The service record could not be saved."
+            );
         }
     }
 
+    /**
+     * Matches onAction="#returnToDashboard" in mobileService.fxml.
+     */
+    @FXML
+    private void returnToDashboard(ActionEvent event) {
+        try {
+            URL resource = getClass().getResource(DASHBOARD_FXML);
+
+            if (resource == null) {
+                throw new IllegalStateException(
+                        "FXML resource not found: " + DASHBOARD_FXML
+                );
+            }
+
+            FXMLLoader loader = new FXMLLoader(resource);
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource())
+                    .getScene()
+                    .getWindow();
+
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException exception) {
+            throw new IllegalStateException(
+                    "Unable to return to the dashboard.",
+                    exception
+            );
+        }
+    }
+
+    /**
+     * Validates all required service fields.
+     */
     private boolean validateInput() {
+        String serviceType = serviceTypeField.getText().trim();
+        String serviceDate = serviceDateField.getText().trim();
+        String mileageText = serviceMileageField.getText().trim();
+        String costText = costField.getText().trim();
 
-        if (serviceTypeField.getText().trim().isEmpty()) {
-            statusLabel.setText("Enter a service type.");
+        if (serviceType.isEmpty()) {
+            showValidationError("Enter a service type.");
             return false;
         }
 
-        if (serviceDateField.getText().trim().isEmpty()) {
-            statusLabel.setText("Enter a service date.");
+        if (serviceDate.isEmpty()) {
+            showValidationError("Enter a service date.");
             return false;
         }
 
-        if (serviceMileageField.getText().trim().isEmpty()) {
-            statusLabel.setText("Enter mileage.");
+        if (mileageText.isEmpty()) {
+            showValidationError("Enter the vehicle mileage.");
             return false;
         }
 
-        if (costField.getText().trim().isEmpty()) {
-            statusLabel.setText("Enter cost.");
+        if (costText.isEmpty()) {
+            showValidationError("Enter the service cost.");
             return false;
         }
 
         try {
-            Integer.parseInt(serviceMileageField.getText().trim());
-            Double.parseDouble(costField.getText().trim());
-        }
-        catch (NumberFormatException e) {
-            statusLabel.setText("Mileage or cost is invalid.");
+            int mileage = Integer.parseInt(mileageText);
+
+            if (mileage < 0) {
+                showValidationError("Mileage cannot be negative.");
+                return false;
+            }
+        } catch (NumberFormatException exception) {
+            showValidationError("Mileage must be a whole number.");
             return false;
         }
+
+        try {
+            double cost = Double.parseDouble(costText);
+
+            if (cost < 0) {
+                showValidationError("Cost cannot be negative.");
+                return false;
+            }
+        } catch (NumberFormatException exception) {
+            showValidationError("Cost must be a valid number.");
+            return false;
+        }
+
         return true;
     }
 
+    /**
+     * Creates a service record from the form fields.
+     */
     private ServiceRecord createServiceRecord() {
         return new ServiceRecord(
                 serviceTypeField.getText().trim(),
@@ -102,12 +185,13 @@ public class AddServiceController {
                 Integer.parseInt(serviceMileageField.getText().trim()),
                 Double.parseDouble(costField.getText().trim()),
                 notesField.getText().trim()
-
         );
     }
 
+    /**
+     * Clears the form after a successful save.
+     */
     private void clearFields() {
-
         serviceTypeField.clear();
         serviceDateField.clear();
         serviceMileageField.clear();
@@ -115,13 +199,23 @@ public class AddServiceController {
         notesField.clear();
     }
 
-    @FXML
-    private void returnToDashboard() {
+    private void showValidationError(String message) {
+        showAlert(
+                Alert.AlertType.WARNING,
+                "Invalid Input",
+                message
+        );
+    }
 
-        System.out.println("Back button pressed.");
-
-        //need to add in what we are using for going back to the dashboard
-
-
+    private void showAlert(
+            Alert.AlertType alertType,
+            String title,
+            String message
+    ) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
