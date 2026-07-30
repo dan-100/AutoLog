@@ -3,11 +3,25 @@ package com.autolog.autolog.controller;
 import com.autolog.autolog.model.Vehicle;
 import com.autolog.autolog.model.VehicleManager;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import java.net.URL;
 
+import java.io.IOException;
+
+/**
+ * Controls the vehicle setup screen.
+ * Allows the user to create or update a vehicle profile
+ * before entering the application's dashboard.
+ *
+ * @author Kellun
+ */
 public class VehicleSetupController {
 
-    private VehicleManager vehicleManager;
+    private final VehicleManager vehicleManager = new VehicleManager();
 
     @FXML
     private TextField yearField;
@@ -21,12 +35,12 @@ public class VehicleSetupController {
     @FXML
     private TextField mileageField;
 
-    public VehicleSetupController() {
-        vehicleManager = new VehicleManager();
-    }
+    /**
+     * Loads the existing vehicle profile, if one exists.
+     */
+    @FXML
+    public void initialize() {
 
-    public void showView() {
-        //@fxml initialize??
         Vehicle vehicle = vehicleManager.getVehicle();
 
         if (vehicle != null) {
@@ -37,17 +51,27 @@ public class VehicleSetupController {
         }
     }
 
-    public void handleContinue() {
+    /**
+     * Creates the vehicle profile and opens the dashboard.
+     */
+    @FXML
+    private void handleContinue() {
+
         if (!validateInput()) {
             return;
         }
-        createVehicle();
 
-        // return to dashboard
+        createVehicle();
+        openDashboard();
     }
 
+    /**
+     * Validates all vehicle information entered by the user.
+     *
+     * @return true if all fields contain valid data
+     */
+    private boolean validateInput() {
 
-    public boolean validateInput() {
         if (yearField.getText().isBlank()
                 || makeField.getText().isBlank()
                 || modelField.getText().isBlank()
@@ -56,8 +80,13 @@ public class VehicleSetupController {
         }
 
         try {
-            Integer.parseInt(yearField.getText());
-            Integer.parseInt(mileageField.getText());
+            int year = Integer.parseInt(yearField.getText().trim());
+            int mileage = Integer.parseInt(mileageField.getText().trim());
+
+            if (year <= 0 || mileage < 0) {
+                return false;
+            }
+
         } catch (NumberFormatException e) {
             return false;
         }
@@ -65,13 +94,49 @@ public class VehicleSetupController {
         return true;
     }
 
-    public void createVehicle() {
-        int year = Integer.parseInt(yearField.getText());
-        String make = makeField.getText();
-        String model = modelField.getText();
-        int mileage = Integer.parseInt(mileageField.getText());
+    /**
+     * Creates and saves the user's vehicle profile.
+     */
+    private void createVehicle() {
+
+        int year = Integer.parseInt(yearField.getText().trim());
+        String make = makeField.getText().trim();
+        String model = modelField.getText().trim();
+        int mileage = Integer.parseInt(mileageField.getText().trim());
 
         Vehicle vehicle = new Vehicle(year, make, model, mileage);
+
         vehicleManager.saveVehicle(vehicle);
+    }
+
+    /**
+     * Opens the application's dashboard.
+     */
+    private void openDashboard() {
+        String dashboardPath =
+                "/com/autolog/autolog/layouts/mobileDashboard.fxml";
+
+        URL dashboardUrl = getClass().getResource(dashboardPath);
+
+        if (dashboardUrl == null) {
+            throw new IllegalStateException(
+                    "Dashboard FXML was not found at: " + dashboardPath
+            );
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(dashboardUrl);
+            Parent root = loader.load();
+
+            Stage stage = (Stage) yearField.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            throw new RuntimeException(
+                    "Could not load the dashboard FXML.",
+                    e
+            );
+        }
     }
 }
