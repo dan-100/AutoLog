@@ -34,7 +34,6 @@
 
 <?import com.gluonhq.charm.glisten.mvc.View?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -100,6 +99,11 @@
                   <Font size="26.0" />
                </font>
             </TextField>
+            <Text fx:id="statusLabel" layoutX="24.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="311.14013671875">
+               <font>
+                  <Font name="Helvetica Neue Bold" size="18.0" />
+               </font>
+            </Text>
             <Text fx:id="serviceTypeLabel" layoutX="25.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Type" wrappingWidth="152.21630859375">
                <font>
                   <Font size="26.0" />
@@ -125,11 +129,6 @@
                   <Font size="26.0" />
                </font>
             </Text>
-            <Label fx:id="statusLabel" layoutX="25.0" layoutY="126.0" prefHeight="17.0" prefWidth="308.0" style="-fx-alignment: center;" text="status">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
          </children>
       </AnchorPane>
    </center>
