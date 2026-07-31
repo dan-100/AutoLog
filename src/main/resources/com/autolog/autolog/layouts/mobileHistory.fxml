@@ -9,17 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane
-        maxHeight="-Infinity"
-        maxWidth="-Infinity"
-        minHeight="-Infinity"
-        minWidth="-Infinity"
-        prefHeight="760.0"
-        prefWidth="360.0"
-        xmlns="http://javafx.com/javafx/21"
-        xmlns:fx="http://javafx.com/fxml/1"
-        fx:controller="com.autolog.autolog.controller.ServiceHistoryController">
-
+<View maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.autolog.autolog.controller.ServiceHistoryController">
    <top>
       <Pane
               prefHeight="118.0"
@@ -50,7 +40,15 @@
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>
-            </Label>
+            </Text>
+            <Button fx:id="backButton" layoutX="8.0" layoutY="62.0" minWidth="27.0" mnemonicParsing="false" onAction="#returnToDashboard" prefHeight="40.0" prefWidth="27.0" style="-fx-background-color: #033375;">
+               <graphic>
+                  <ImageView fitHeight="39.0" fitWidth="41.0" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../data/backButton.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
          </children>
       </Pane>
    </top>
@@ -62,39 +60,26 @@
               BorderPane.alignment="CENTER">
 
          <children>
-            <Pane
-                    layoutX="18.0"
-                    layoutY="19.0"
-                    prefHeight="115.0"
-                    prefWidth="324.0"
-                    style="-fx-background-color: #033375;
-                               -fx-background-radius: 4;">
-
+            <ScrollPane fx:id="summaryList" layoutX="18.0" layoutY="144.0" prefHeight="481.0" prefWidth="325.0">
+               <content>
+                  <VBox fx:id="summaryEvents" prefHeight="645.0" prefWidth="309.0" />
+               </content>
+            </ScrollPane>
+            <Pane layoutX="18.0" layoutY="19.0" prefHeight="115.0" prefWidth="322.0" style="-fx-background-color: #033375;">
                <children>
-                  <Label
-                          alignment="CENTER"
-                          layoutX="15.0"
-                          layoutY="18.0"
-                          prefWidth="294.0"
-                          text="Total Spent on Maintenance"
-                          textAlignment="CENTER"
-                          textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="19.0" />
-                     </font>
-                  </Label>
-
-                  <Label
-                          fx:id="totalAmountLabel"
-                          alignment="CENTER"
-                          layoutX="15.0"
-                          layoutY="55.0"
-                          prefWidth="294.0"
-                          text="\$0.00"
-                          textAlignment="CENTER"
-                          textFill="WHITE">
+                  <Text fill="WHITE" layoutX="76.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$">
                      <font>
                         <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Label layoutX="98.0" layoutY="49.0" text="amountLabel" textFill="#f8f8f8">
+                     <font>
+                        <Font name="Helvetica Neue Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="14.0" style="-fx-alignment: center;" text="Total Spent on Maintenance" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Helvetica Neue Bold" size="22.0" />
                      </font>
                   </Label>
                </children>
