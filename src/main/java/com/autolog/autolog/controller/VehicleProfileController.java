@@ -46,7 +46,6 @@ public class VehicleProfileController {
 
     public void saveChanges() {
         if (!validateInput()) {
-           System.out.println("Invalid Input");
             return;
         }
 
@@ -62,7 +61,6 @@ public class VehicleProfileController {
         Vehicle vehicle = new Vehicle(year, make, model, mileage);
 
         vehicleManager.updateVehicle(vehicle);
-        System.out.println("Vehicle Saved Successfully" + vehicle.getYear() + vehicle.getMake()+vehicle.getModel()+vehicle.getMileage());
     }
 
     public boolean validateInput() {
