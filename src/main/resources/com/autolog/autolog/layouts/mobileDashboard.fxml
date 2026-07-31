@@ -32,7 +32,6 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import com.gluonhq.charm.glisten.mvc.View?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -45,7 +44,7 @@
 
 <View maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.autolog.autolog.controller.DashboardController">
    <children>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="360.0">
+      <Pane fx:id="headerColor" prefHeight="114.0" prefWidth="360.0" style="-fx-background-color: #033375;">
          <children>
             <Pane fx:id="headerColor" prefHeight="114.0" prefWidth="360.0" style="-fx-background-color: #033375;">
                <children>
@@ -67,7 +66,7 @@
             </Pane>
             <Text fx:id="welcomeLabel" layoutX="39.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome back, ">
                <font>
-                  <Font name="Helvetica Neue Bold" size="26.0" />
+                  <Font name="Helvetica Neue Bold" size="36.0" />
                </font>
             </Text>
             <Pane fx:id="VehicleOverview" layoutX="20.0" layoutY="181.0" prefHeight="143.0" prefWidth="322.0" style="-fx-background-color: white; -fx-border-color: black;">
@@ -156,19 +155,35 @@
             </Pane>
             <Button layoutX="19.0" layoutY="601.0" mnemonicParsing="false" onAction="#openVehicleProfile" prefHeight="63.0" prefWidth="154.0" style="-fx-background-color: white; -fx-text-fill: #033375;" text="Vehicle Profile" textFill="#033375">
                <graphic>
-                  <ImageView fitHeight="42.0" fitWidth="46.0" preserveRatio="true">
+                  <ImageView fitHeight="42.0" fitWidth="49.0" preserveRatio="true">
                      <image>
                         <Image url="@../../../../data/car.png" />
                      </image>
                   </ImageView>
                </graphic>
+            </Button>
+         </children>
+      </Pane>
+      <Text fx:id="welcomeLabel" layoutX="39.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome back, ">
+         <font>
+            <Font name="Helvetica Neue Bold" size="26.0" />
+         </font>
+      </Text>
+      <Pane fx:id="VehicleOverview" layoutX="20.0" layoutY="181.0" prefHeight="143.0" prefWidth="322.0" style="-fx-background-color: white; -fx-border-color: black;">
+         <children>
+            <ImageView fitHeight="112.0" fitWidth="129.0" layoutX="7.0" layoutY="15.0" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../data/vehicle.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="carInfoLabel" layoutX="111.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CarYear CarMake CarModel" wrappingWidth="204.00001525878906">
                <font>
-                  <Font name="Helvetica Neue Bold" size="13.0" />
+                  <Font name="Helvetica Neue Bold" size="14.0" />
                </font>
             </Button>
             <Button layoutX="19.0" layoutY="672.0" mnemonicParsing="false" onAction="#openServiceHistory" prefHeight="63.0" prefWidth="154.0" style="-fx-text-fill: #033375; -fx-background-color: white;" text="Service History" textFill="#033375">
                <font>
-                  <Font name="Helvetica Neue Bold" size="13.0" />
+                  <Font name="Helvetica Neue" size="14.0" />
                </font>
                <graphic>
                   <ImageView fitHeight="38.0" fitWidth="38.0" preserveRatio="true">
@@ -180,7 +195,7 @@
             </Button>
             <Button layoutX="183.0" layoutY="601.0" mnemonicParsing="false" onAction="#openAddService" prefHeight="63.0" prefWidth="154.0" style="-fx-text-fill: #033375; -fx-background-color: white;" text="Add Service" textFill="#033375">
                <font>
-                  <Font name="Helvetica Neue Bold" size="13.0" />
+                  <Font name="Helvetica Neue Bold" size="14.0" />
                </font>
                <graphic>
                   <ImageView fitHeight="45.0" fitWidth="51.0" preserveRatio="true">
@@ -192,7 +207,7 @@
             </Button>
             <Button layoutX="184.0" layoutY="672.0" mnemonicParsing="false" onAction="#openVehicleOverview" prefHeight="63.0" prefWidth="154.0" style="-fx-background-color: white; -fx-text-fill: #033375;" text="Summary" textFill="#033375">
                <font>
-                  <Font name="Helvetica Neue Bold" size="13.0" />
+                  <Font name="Helvetica Neue Bold" size="20.0" />
                </font>
                <graphic>
                   <ImageView fitHeight="43.0" fitWidth="50.0" preserveRatio="true">
@@ -206,4 +221,4 @@
       </AnchorPane>
       <Label prefHeight="0.0" prefWidth="0.0" text="dsfsdf" />
    </children>
-</View>
+</AnchorPane>
