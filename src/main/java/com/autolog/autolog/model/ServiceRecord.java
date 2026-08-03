@@ -1,5 +1,13 @@
 package com.autolog.autolog.model;
 
+/**
+ * Represents a single vehicle maintenance or service record.
+ * Stores information such as the service type, date performed,
+ * vehicle mileage, service cost, and additional notes.
+ *
+ * @author Ean
+ */
+
 public class ServiceRecord {
 
     private String serviceType;
@@ -7,6 +15,16 @@ public class ServiceRecord {
     private int mileage;
     private double cost;
     private String notes;
+
+    /**
+     * Creates a new service record.
+     *
+     * @param serviceType the type of service performed
+     * @param date the date the service was completed
+     * @param mileage the vehicle mileage at the time of service
+     * @param cost the cost of the service
+     * @param notes additional notes about the service
+     */
 
     public ServiceRecord(String serviceType,
                          String date,
@@ -21,6 +39,9 @@ public class ServiceRecord {
         this.notes = notes;
     }
 
+    /**
+     * General Getters and Setters needed for the class
+     */
     public String getServiceType() {
         return serviceType;
     }
@@ -66,6 +87,12 @@ public class ServiceRecord {
             this.notes = notes;
     }
 
+    /**
+     * Converts this service record into CSV format for file storage.
+     *
+     * @return a comma-separated representation of the service record
+     */
+
     public String toCSV() {
 
         return serviceType + "," +
@@ -74,6 +101,12 @@ public class ServiceRecord {
                 cost + "," +
                 notes;
     }
+
+    /**
+     * Returns a formatted string representation of the service record.
+     *
+     * @return the formatted service record
+     */
 
     @Override
     public String toString() {
