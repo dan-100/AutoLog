@@ -53,10 +53,6 @@ public class VehicleProfileController {
         String make = makeField.getText();
         String model = modelField.getText();
         int mileage = Integer.parseInt(mileageField.getText());
-        //if notes are needed
-//        if (!notesField.getText().equals("")) {
-//            String notes = notesField.getText();
-//        }
 
         Vehicle vehicle = new Vehicle(year, make, model, mileage);
 

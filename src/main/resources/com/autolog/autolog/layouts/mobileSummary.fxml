@@ -43,7 +43,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<View maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.autolog.autolog.controller.VehicleOverviewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <Pane fx:id="headerColor" prefHeight="114.0" prefWidth="360.0" style="-fx-background-color: #033375;" BorderPane.alignment="CENTER">
          <children>
@@ -52,15 +52,21 @@
                   <Font name="Helvetica Neue Bold" size="26.0" />
                </font>
             </Text>
-            <Button layoutY="66.0" minWidth="27.0" mnemonicParsing="false" onAction="#returnToDashboard" prefHeight="40.0" prefWidth="27.0" style="-fx-background-color: #033375;">
+            <Button fx:id="saveButton" layoutX="306.0" layoutY="66.0" minWidth="39.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="39.0" style="-fx-background-color: #033375;" />
+            <Button fx:id="backButton" layoutY="66.0" minWidth="27.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="27.0" style="-fx-background-color: #033375;">
                <graphic>
                   <ImageView fitHeight="39.0" fitWidth="32.0" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../data/backButton.png" />
+                        <Image url="@../chevron-left-solid-2.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
+            <ImageView fitHeight="43.0" fitWidth="43.0" layoutX="298.0" layoutY="66.0" preserveRatio="true">
+               <image>
+                  <Image url="@../floppy-disk-regular-2.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </top>
